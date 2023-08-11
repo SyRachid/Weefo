@@ -17,6 +17,10 @@ class Admin(Base):
     livreurs = relationship("Livreur", back_populates="admin")
     livraisons = relationship("Livraison", back_populates="admin")
 
+    def __init__(self, username, password):
+        self.username = username
+        self.password = password
+
     
     
 
@@ -32,6 +36,14 @@ class Livreur(Base):
     admin = relationship("Admin", back_populates="livreurs")
     livraisons = relationship("Livraison", back_populates="livreur")
 
+    def __init__(self, username, password, numtel, numCNIB, disponibilite, admin):
+        self.username = username
+        self.password = password
+        self.numtel = numtel
+        self.numCNIB = numCNIB
+        self.disponibilite = disponibilite
+        self.admin = admin
+
 
 
 class Client(Base):
@@ -42,6 +54,12 @@ class Client(Base):
     numtel:Mapped[str]=mapped_column(nullable=False)
     adr:Mapped[str]=mapped_column(nullable=False)
     livraisons = relationship("Livraison", back_populates="client")
+
+    def __init__(self, username, password, numtel, adr):
+        self.username = username
+        self.password = password
+        self.numtel = numtel
+        self.adr = adr
 
 
 
@@ -55,3 +73,9 @@ class Livraison(Base):
     livreur = relationship("Livreur", back_populates="livraisons")
     client_id = mapped_column(ForeignKey('client.id'))
     client = relationship("Client", back_populates="livraisons")
+
+    def __init__(self, etatLivraison, admin, livreur, client):
+        self.etatLivraison = etatLivraison
+        self.admin = admin
+        self.livreur = livreur
+        self.client = client
