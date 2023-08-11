@@ -2,12 +2,8 @@ from sqlalchemy.orm import DeclarativeBase,relationship,Mapped,mapped_column
 from sqlalchemy import ForeignKey,Text
 from typing import List
 
-
-
 class Base(DeclarativeBase):
     pass
-
-
 
 class Admin(Base):
     __tablename__= 'admin'
@@ -20,9 +16,6 @@ class Admin(Base):
     def __init__(self, username, password):
         self.username = username
         self.password = password
-
-    
-    
 
 class Livreur(Base):
     __tablename__ = 'livreur'
@@ -44,8 +37,6 @@ class Livreur(Base):
         self.disponibilite = disponibilite
         self.admin = admin
 
-
-
 class Client(Base):
     __tablename__= 'client'
     id:Mapped[int]=mapped_column(primary_key=True)
@@ -60,8 +51,6 @@ class Client(Base):
         self.password = password
         self.numtel = numtel
         self.adr = adr
-
-
 
 class Livraison(Base):
     __tablename__= 'livraison'
