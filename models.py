@@ -1,6 +1,13 @@
 from sqlalchemy.orm import DeclarativeBase,relationship,Mapped,mapped_column
 from sqlalchemy import ForeignKey,Text
 from typing import List
+import logging
+
+# Configure le niveau de journalisation global
+logging.basicConfig(level=logging.INFO)
+
+# Configure le niveau de journalisation spécifiquement pour le moteur SQLAlchemy
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
 class Base(DeclarativeBase):
     pass

@@ -1,7 +1,11 @@
 from sqlalchemy import create_engine,text
+import logging
 
-engine=create_engine("sqlite:///weefo.db",echo=True)
+# Configure le niveau de journalisation global
+logging.basicConfig(level=logging.INFO)
 
-with engine.connect() as connection:
-    result = connection.execute(text('select "hello"'))
-    print(result.all())
+# Configure le niveau de journalisation spécifiquement pour le moteur SQLAlchemy
+logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
+
+engine=create_engine("sqlite:///weefo.db")
+
