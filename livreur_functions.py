@@ -27,6 +27,7 @@ def afficher_livraisons_livreur(livreur_id):
                     session.commit()
                     livraison.livreur.disponibilite = "oui"
                     session.commit()
+                    print(f"Veuillez gérer la livraison a l'addresse {livraison.client.adr}")
         else:
             print(f"Aucune livraison pour le livreur {livreur.username}.")
     else:

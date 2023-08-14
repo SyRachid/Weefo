@@ -12,7 +12,6 @@ def creer_nouvelle_livraison(client_id, etatLivraison):
     client = session.query(Client).get(client_id)
     if client:
         livreur = session.query(Livreur).filter_by(disponibilite = "oui").first()
-        print(f"je suis le livreur {livreur.username} pour cette livraison\n")
         if livreur:
             nouvelle_livraison = Livraison(etatLivraison=etatLivraison, admin=livreur.admin, livreur=livreur, client=client)
             livreur.disponibilite = "non"
