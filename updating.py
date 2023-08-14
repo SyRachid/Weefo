@@ -1,6 +1,4 @@
-from main import session
-from models import Admin, Livreur, Client, Livraison
-
+from database_utils import session, Livraison, Livreur
 def update_livreur(livreur_id, new_username):
     livreur = session.query(Livreur).filter_by(id=livreur_id).first()
     if livreur:

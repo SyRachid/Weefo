@@ -4,16 +4,17 @@ import logging
 logging.getLogger('sqlalchemy').setLevel(logging.WARNING)
 
 def Livre_moi():
-    id = input("entrez votre Id pour la livraison")
+    id = input("entrez votre Id pour la livraison: ")
     id_ = int(id)
     creer_nouvelle_livraison(id_,"en cours")
 
 def creer_nouvelle_livraison(client_id, etatLivraison):
     client = session.query(Client).get(client_id)
     if client:
-        livreur = session.query(Livreur).filter_by(disponibilite = "OUI").first()
+        livreur = session.query(Livreur).filter_by(disponibilite = "oui").first()
+        print(f"je suis le livreur {livreur.username} pour cette livraison\n")
         if livreur:
-            nouvelle_livraison = Livraison(etatLivraison=etatLivraison, admin=client.admin, livreur=livreur, client=client)
+            nouvelle_livraison = Livraison(etatLivraison=etatLivraison, admin=livreur.admin, livreur=livreur, client=client)
             livreur.disponibilite = "non"
             session.add(nouvelle_livraison)
             session.commit()

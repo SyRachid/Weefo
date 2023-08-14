@@ -1,5 +1,5 @@
 from models import Admin, Livreur, Client, Livraison
-from admin_functions import afficher_livreurs
+from admin_functions import afficher_livreurs, afficher_Clients
 from livreur_functions import LivreurEffect,afficher_livraisons_livreur
 from client_functions import creer_nouvelle_livraison,Livre_moi
 from database_utils import session
@@ -51,7 +51,14 @@ def main():
             user_type = authentification(username, password)
             
             if user_type == "admin":
-                afficher_livreurs()
+                print("entrez pour afficher: ")
+                option = input("1-livreurs\n2-clients: ")
+                if option == "1":
+                    afficher_livreurs()
+                elif option == "2":
+                    afficher_Clients()
+                else:
+                    print("option incorrect")
                 # Appel de fonctions pour gérer les opérations administratives
             elif user_type == "livreur":
                 # Appel de fonctions pour gérer les opérations des livreurs

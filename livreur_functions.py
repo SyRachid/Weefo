@@ -1,15 +1,39 @@
 from database_utils import session, Admin, Livreur, Client, Livraison
 import logging
 
+from updating import update_livraison
 logging.getLogger('sqlalchemy').setLevel(logging.CRITICAL)
+from sqlalchemy.exc import SQLAlchemyError
 
 def afficher_livraisons_livreur(livreur_id):
-    livraisons = session.query(Livraison).filter_by(livreur_id=livreur_id).all()
-    for livraison in livraisons:
-        print(f"ID: {livraison.id}, État: {livraison.etatLivraison}, Client: {livraison.client.username}")
-
+    livreur = session.query(Livreur).get(livreur_id)
+    if livreur:
+        livraisons = livreur.livraisons
+        if livraisons:
+            print(f"Livraisons du livreur {livreur.username}:")
+            for livraison in livraisons:
+                if livraison.client:
+                    print(f"ID de la livraison : {livraison.id}, Etat : {livraison.etatLivraison}, Client: {livraison.client.username}, Addresse: {livraison.client.adr}")
+            choice = input("tapez l'ID de la livraison a effectuée ou tapez exit pour quitter:  ")
+            if choice != "exit":
+                choice_ = int(choice)
+                session.close()
+                livraison = session.query(Livraison).get(choice_)
+                if livraison.etatLivraison == "effectuée":
+                    print("Livraison deja effectuée")
+                    exit()
+                else:
+                    livraison.etatLivraison = "effectuée"
+                    session.commit()
+                    livraison.livreur.disponibilite = "oui"
+                    session.commit()
+        else:
+            print(f"Aucune livraison pour le livreur {livreur.username}.")
+    else:
+        print("Livreur non trouvé ou aucune livraison disponible pour ce livreur.")
+#fonction pour effectuée une livraison 
 def LivreurEffect():
-    id = input("entrer l'id du livreur")
+    id = input("entrer l'id du livreur: ")
     id_ = int(id)
     afficher_livraisons_livreur(id_)
 # Ajoutez ici d'autres fonctions pour gérer les opérations des livreurs
