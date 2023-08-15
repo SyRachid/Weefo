@@ -1,7 +1,7 @@
 from models import Admin, Livreur, Client, Livraison
-from admin_functions import afficher_livreurs, afficher_Clients
+from admin_functions import afficher_livreurs, afficher_Clients,afficher_livraisons
 from livreur_functions import LivreurEffect,afficher_livraisons_livreur
-from client_functions import creer_nouvelle_livraison,Livre_moi
+from client_functions import creer_nouvelle_livraison,Livre_moi,afficherLivraisonsClient
 from database_utils import session
 import logging
 
@@ -51,21 +51,42 @@ def main():
             user_type = authentification(username, password)
             
             if user_type == "admin":
-                print("entrez pour afficher: ")
-                option = input("1-livreurs\n2-clients: ")
-                if option == "1":
+                while True:
+                 print("entrez pour afficher: ")
+                 option = input("1-livreurs\n2-clients\n3-livraisons\n0-pour quitter: \n")
+                 if option == "1":
                     afficher_livreurs()
-                elif option == "2":
+                    print("\n")
+                 elif option == "2":
                     afficher_Clients()
-                else:
+                    print("\n")
+                 elif option == "3":
+                    afficher_livraisons()
+                    print("\n")
+                 elif option == "0" :
+                     print("Au revoir chere admin!!!")
+                     break
+                 else:
                     print("option incorrect")
+                 
                 # Appel de fonctions pour gérer les opérations administratives
             elif user_type == "livreur":
                 # Appel de fonctions pour gérer les opérations des livreurs
                 LivreurEffect()
             elif user_type == "client":
-                # Appel de fonctions pour gérer les opérations des clients
-                Livre_moi()
+                while True:
+                    print("Tapez: ")
+                    option = input("1-pour se faire livrer a votre addresse\n2-pour afficher la liste des livraisons\n0-pour quitter")
+                    if option == "1":
+                        Livre_moi()
+                    elif option == "2":
+                        use = input("Entrez votre Id pour plus de sécurité: ")
+                        use_=use
+                        afficherLivraisonsClient(use_)
+                        #affichage liste des livraisons
+                    elif option == "0":
+                        print("Au revoir")
+                        break
             else:
                 print("Authentification échouée")
 

@@ -22,5 +22,12 @@ def creer_nouvelle_livraison(client_id, etatLivraison):
             print("Aucun livreur disponible pour le moment.")
     else:
         print("Client non trouvé.")
+ 
+def afficherLivraisonsClient(client_id):
+    client = session.query(Client).get(client_id)
+    if client:
+        livraisons = client.livraisons
+    for livraison in livraisons:
+         print(f"ID de la livraison : {livraison.id}, Etat : {livraison.etatLivraison}, Client: {livraison.livreur.username}, Addresse: {livraison.livreur.numCNIB}")
 
 # Ajoutez ici d'autres fonctions pour gérer les opérations des clients

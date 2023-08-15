@@ -15,4 +15,9 @@ def afficher_Clients():
     for client in clients:
         print(f"ID: {client.id}, Nom d'utilisateur: {client.username}, Addresse: {client.adr}")
 
+def afficher_livraisons():
+    livraisons = session.query(Livraison).all()
+    print("Historique des Livraisons de Weefo: ")
+    for livraison in livraisons:
+         print(f"ID de la livraison : {livraison.id}, Etat : {livraison.etatLivraison}, Client: {livraison.client.username}, Addresse: {livraison.client.adr}")
 # Autres fonctions administratives
