@@ -1,11 +1,8 @@
-from database_utils import session, Admin, Livreur, Client, Livraison
-import logging
+from  Weefo.database_utils import session, Admin, Livreur, Client, Livraison
 
-from updating import update_livraison
-logging.getLogger('sqlalchemy').setLevel(logging.CRITICAL)
 from sqlalchemy.exc import SQLAlchemyError
 
-def afficher_livraisons_livreur(livreur_id):
+def afficher_livraisons_livreur(livreur_id, session):
     livreur = session.query(Livreur).get(livreur_id)
     if livreur:
         livraisons = livreur.livraisons

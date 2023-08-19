@@ -1,5 +1,5 @@
-from models import Admin, Livreur, Client,Livraison
-from main import session
+from Weefo.models import Admin, Livreur, Client,Livraison
+from Weefo.database_utils import session
 
 admin1= Admin(
     username='Monsieur',

@@ -1,4 +1,4 @@
-from database_utils import session, Admin, Livreur, Client, Livraison
+from Weefo.database_utils import session, Admin, Livreur, Client, Livraison
 import logging
 
 logging.getLogger('sqlalchemy').setLevel(logging.WARNING)
@@ -6,10 +6,10 @@ logging.getLogger('sqlalchemy').setLevel(logging.WARNING)
 def Livre_moi():
     id = input("entrez votre Id pour la livraison: ")
     id_ = int(id)
-    creer_nouvelle_livraison(id_,"en cours")
+    creer_nouvelle_livraison(id_,"en cours",session)
 
-def creer_nouvelle_livraison(client_id, etatLivraison):
-    client = session.query(Client).get(client_id)
+def creer_nouvelle_livraison(client_id, etatLivraison,session):
+    client = session.query(Client).filter_by(id=client_id).first()
     if client:
         livreur = session.query(Livreur).filter_by(disponibilite = "oui").first()
         if livreur:

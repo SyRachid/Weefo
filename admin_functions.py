@@ -1,4 +1,4 @@
-from database_utils import session, Admin, Livreur, Client, Livraison
+from Weefo.database_utils import session, Admin, Livreur, Client, Livraison
 import logging
 
 logging.getLogger('sqlalchemy').setLevel(logging.CRITICAL)

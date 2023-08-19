@@ -38,3 +38,4 @@ def delete_livraison(livraison_id):
         print(f"Livraison avec ID {livraison_id} non trouvée.")
 
 
+delete_client(5)

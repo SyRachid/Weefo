@@ -1,8 +1,8 @@
-from models import Admin, Livreur, Client, Livraison
-from admin_functions import afficher_livreurs, afficher_Clients,afficher_livraisons
-from livreur_functions import LivreurEffect,afficher_livraisons_livreur
-from client_functions import creer_nouvelle_livraison,Livre_moi,afficherLivraisonsClient
-from database_utils import session
+from Weefo.models import Admin, Livreur, Client, Livraison
+from  Weefo.admin_functions import afficher_livreurs, afficher_Clients,afficher_livraisons
+from  Weefo.livreur_functions import LivreurEffect,afficher_livraisons_livreur
+from  Weefo.client_functions import Livre_moi,afficherLivraisonsClient
+from  Weefo.database_utils import session
 import logging
 
 # Configure le niveau de journalisation global
@@ -12,7 +12,7 @@ logging.basicConfig(level=logging.INFO)
 logging.getLogger('sqlalchemy.engine').setLevel(logging.WARNING)
 
 
-def authentification(username, password):
+def authentification(username, password,session):
     # Vérifier l'authentification pour admin
     admin = session.query(Admin).filter_by(username=username, password=password).first()
     if admin:
@@ -48,7 +48,7 @@ def main():
         if choix == "1":
             username = input("Nom d'utilisateur : ")
             password = input("Mot de passe : ")
-            user_type = authentification(username, password)
+            user_type = authentification(username, password,session)
             
             if user_type == "admin":
                 while True:
