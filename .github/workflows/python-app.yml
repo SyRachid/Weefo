@@ -25,8 +25,8 @@ jobs:
         python-version: "3.10"
     - name: Install dependencies
       run: |
-        source myvenv/bin/activate
-        python -m myvenv venv
+        source myenv/bin/activate
+        python -m myenv venv
         pip install -r requirements.txt
     - name: Test with pytest
       run: |
