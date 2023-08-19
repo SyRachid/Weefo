@@ -1,3 +1,5 @@
+import sys
+sys.path.insert(0, 'C:/Users/HP Pavillon/Weefo') 
 import pytest
 from sqlalchemy.orm import Session
 from Weefo.create_tables import create_db
