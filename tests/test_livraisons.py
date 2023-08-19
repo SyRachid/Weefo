@@ -1,3 +1,6 @@
+import sys
+sys.path.insert(0, 'C:/Users/HP Pavillon/Weefo') 
+
 from Weefo.models import Client, Livreur, Livraison,Admin
 from Weefo.client_functions import creer_nouvelle_livraison
 
